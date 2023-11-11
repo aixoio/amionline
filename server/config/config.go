@@ -6,7 +6,7 @@ import (
 )
 
 type ConfigData struct {
-	Msg string `json:"msg"`
+	Db string `json:"db"`
 }
 
 func LoadConfig(path string) (*ConfigData, error) {
