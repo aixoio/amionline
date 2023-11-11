@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"github.com/aixoio/amionline/server/router"
+)
 
 func main() {
-	fmt.Println("Hello world!")
+	router.Start()
 }
