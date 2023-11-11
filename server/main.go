@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/aixoio/amionline/server/config"
+	"github.com/aixoio/amionline/server/db"
 )
 
 func main() {
@@ -13,5 +14,11 @@ func main() {
 		fmt.Println("Failed to load config file with error:", err.Error())
 		return
 	}
+
+	db_connecter, err := db.Connect(config.Db)
+	if err != nil {
+		fmt.Println("Failed to connect to database with error:", err.Error())
+	}
+	defer db.Disconnect(db_connecter)
 
 }
