@@ -23,6 +23,7 @@ func main() {
 	}
 	defer mysql.Disconnect(db_connecter)
 
-	rediscache.Connect(config.Redisurl)
-	router.Start(db_connecter)
+	redis_client := rediscache.Connect(config.Redisurl)
+
+	router.Start(db_connecter, redis_client)
 }
