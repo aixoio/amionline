@@ -5,6 +5,7 @@ import (
 
 	"github.com/aixoio/amionline/server/config"
 	"github.com/aixoio/amionline/server/db/mysql"
+	"github.com/aixoio/amionline/server/db/rediscache"
 	"github.com/aixoio/amionline/server/router"
 )
 
@@ -22,5 +23,6 @@ func main() {
 	}
 	defer mysql.Disconnect(db_connecter)
 
+	rediscache.Connect()
 	router.Start(db_connecter)
 }
