@@ -6,9 +6,9 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
-func Connect() {
+func Connect(addr string) {
 	client := redis.NewClient(&redis.Options{
-		Addr: "localhost:6379",
+		Addr: addr,
 	})
 	ctx := context.Background()
 	client.Set(ctx, "foo", "bar", 0)

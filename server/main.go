@@ -17,12 +17,12 @@ func main() {
 		return
 	}
 
-	db_connecter, err := mysql.Connect(config.Db)
+	db_connecter, err := mysql.Connect(config.Mysqldb)
 	if err != nil {
 		fmt.Println("Failed to connect to database with error:", err.Error())
 	}
 	defer mysql.Disconnect(db_connecter)
 
-	rediscache.Connect()
+	rediscache.Connect(config.Redisurl)
 	router.Start(db_connecter)
 }
