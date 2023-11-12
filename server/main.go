@@ -5,6 +5,7 @@ import (
 
 	"github.com/aixoio/amionline/server/config"
 	"github.com/aixoio/amionline/server/db"
+	"github.com/aixoio/amionline/server/router"
 )
 
 func main() {
@@ -21,4 +22,5 @@ func main() {
 	}
 	defer db.Disconnect(db_connecter)
 
+	router.Start(db_connecter)
 }

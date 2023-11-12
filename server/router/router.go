@@ -1,12 +1,13 @@
 package router
 
 import (
+	"database/sql"
 	"net/http"
 
 	"github.com/gorilla/mux"
 )
 
-func Start() {
+func Start(db_connecter *sql.DB) {
 	r := mux.NewRouter()
 	
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
