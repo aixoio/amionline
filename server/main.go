@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/aixoio/amionline/server/config"
-	"github.com/aixoio/amionline/server/db"
+	"github.com/aixoio/amionline/server/db/mysql"
 	"github.com/aixoio/amionline/server/router"
 )
 
@@ -16,11 +16,11 @@ func main() {
 		return
 	}
 
-	db_connecter, err := db.Connect(config.Db)
+	db_connecter, err := mysql.Connect(config.Db)
 	if err != nil {
 		fmt.Println("Failed to connect to database with error:", err.Error())
 	}
-	defer db.Disconnect(db_connecter)
+	defer mysql.Disconnect(db_connecter)
 
 	router.Start(db_connecter)
 }
