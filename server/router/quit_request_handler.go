@@ -6,11 +6,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 
 	"github.com/aixoio/amionline/server/config"
 	"github.com/aixoio/amionline/server/data"
+	"github.com/aixoio/amionline/server/db/mysql"
 	"github.com/gorilla/mux"
 	"github.com/redis/go-redis/v9"
 )
@@ -50,6 +52,51 @@ func register_quit_request_handler(db_connecter *sql.DB, r *mux.Router, config_d
 			w.Write(jsonres)
 			return
 		}
+
+		var input data.QuitData
+		input_err := json.NewDecoder(r.Body).Decode(&input)
+		if input_err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			res := data.QuitData_Responce{
+				Success: false,
+				Error_msg: "Cannot read request body",
+			}
+			jsonres, err := json.Marshal(res)
+			if err != nil {
+				return
+			}
+			w.Write(jsonres)
+			return
+		}
+
+		if input.Pwd == config_data.Quitpwd {
+			w.WriteHeader(http.StatusOK)
+			res := data.QuitData_Responce{
+				Success: true,
+				Error_msg: "",
+			}
+			jsonres, err := json.Marshal(res)
+			if err != nil {
+				return
+			}
+			w.Write(jsonres)
+
+			mysql.Disconnect(db_connecter)
+
+			os.Exit(0)
+			return
+		}
+
+		w.WriteHeader(http.StatusUnauthorized)
+		res := data.QuitData_Responce{
+			Success: false,
+			Error_msg: "Incorrect password",
+		}
+		jsonres, err := json.Marshal(res)
+		if err != nil {
+			return
+		}
+		w.Write(jsonres)
 
 	})
 }
