@@ -27,6 +27,7 @@ func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB) {
 				return
 			}
 			w.Write(jsonres)
+			return
 		}
 		defer tx.Commit()
 		
@@ -44,6 +45,7 @@ func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB) {
 				return
 			}
 			w.Write(jsonres)
+			return
 		}
 
 		res, err := tx.Exec("INSERT INTO `events` (`success`, `time_ms`, `target_ip`, `time_of_request`) VALUES (?, ?, ?, ?)",
@@ -60,6 +62,7 @@ func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB) {
 				return
 			}
 			w.Write(jsonres)
+			return
 		}
 
 		w.WriteHeader(http.StatusOK)
