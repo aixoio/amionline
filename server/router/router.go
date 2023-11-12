@@ -15,5 +15,7 @@ func Start(db_connecter *sql.DB, redis_client *redis.Client) {
 		w.Write([]byte("Hello world!"))
 	})
 
+	register_log_event_request_handler(r, db_connecter)
+
 	http.ListenAndServe(":9090", r)
 }
