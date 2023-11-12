@@ -25,5 +25,5 @@ func main() {
 
 	redis_client := rediscache.Connect(config.Redisurl)
 
-	router.Start(db_connecter, redis_client)
+	router.Start(db_connecter, redis_client, config)
 }

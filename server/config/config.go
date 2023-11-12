@@ -8,6 +8,7 @@ import (
 type ConfigData struct {
 	Mysqldb string `json:"mysqldb"`
 	Redisurl string `json:"redisurl"`
+	Quitpwd string `json:"quitpwd"`
 }
 
 func LoadConfig(path string) (*ConfigData, error) {
