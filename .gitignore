@@ -1,3 +1,4 @@
 .vscode
 server/env.json
 dump.rdb
+server/server
