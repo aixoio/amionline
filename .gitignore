@@ -2,3 +2,4 @@
 server/env.json
 dump.rdb
 server/server
+go.work
