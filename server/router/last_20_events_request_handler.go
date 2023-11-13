@@ -139,7 +139,7 @@ func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB
 		}
 
 		ctx = context.Background()
-		redis_client.SetEx(ctx, "events:last:20", string(cache_bytes), time.Hour * 4)
+		redis_client.SetEx(ctx, "events:last:20", string(cache_bytes), time.Hour / 2)
 
 		w.WriteHeader(http.StatusOK)
 		responce := data.Last20Events_Responce{
