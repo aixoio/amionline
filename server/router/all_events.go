@@ -42,6 +42,7 @@ func register_all_events_request_handler(r *mux.Router, db_connecter *sql.DB, re
 			}
 			jsonres, err := json.Marshal(result)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				return
 			}
 			w.Write(jsonres)
@@ -52,6 +53,7 @@ func register_all_events_request_handler(r *mux.Router, db_connecter *sql.DB, re
 
 		tx, err := db_connecter.Begin()
 		if err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			w.WriteHeader(http.StatusInternalServerError)
 			res := data.AllEvents_Responce{
 				Success: false,
@@ -59,6 +61,7 @@ func register_all_events_request_handler(r *mux.Router, db_connecter *sql.DB, re
 			}
 			jsonres, err := json.Marshal(res)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				return
 			}
 			w.Write(jsonres)
@@ -68,6 +71,7 @@ func register_all_events_request_handler(r *mux.Router, db_connecter *sql.DB, re
 
 		rows, err := tx.Query("SELECT id, success, time_ms, target_ip, time_of_request FROM events")
 		if err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			w.WriteHeader(http.StatusInternalServerError)
 			res := data.AllEvents_Responce{
 				Success: false,
@@ -75,6 +79,7 @@ func register_all_events_request_handler(r *mux.Router, db_connecter *sql.DB, re
 			}
 			jsonres, err := json.Marshal(res)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				return
 			}
 			w.Write(jsonres)
@@ -97,6 +102,7 @@ func register_all_events_request_handler(r *mux.Router, db_connecter *sql.DB, re
 
 			err := rows.Scan(&id, &success, &time_ms, &target_ip, &time_of_request)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				w.WriteHeader(http.StatusInternalServerError)
 				res := data.AllEvents_Responce{
 					Success: false,
@@ -104,6 +110,7 @@ func register_all_events_request_handler(r *mux.Router, db_connecter *sql.DB, re
 				}
 				jsonres, err := json.Marshal(res)
 				if err != nil {
+					logger.Error().Printf("Found error: %s\n", err.Error())
 					return
 				}
 				w.Write(jsonres)
@@ -126,6 +133,7 @@ func register_all_events_request_handler(r *mux.Router, db_connecter *sql.DB, re
 		}
 		cache_bytes, err := json.Marshal(data_to_cache)
 		if err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			w.WriteHeader(http.StatusInternalServerError)
 			res := data.AllEvents_Responce{
 				Success: false,
@@ -133,6 +141,7 @@ func register_all_events_request_handler(r *mux.Router, db_connecter *sql.DB, re
 			}
 			jsonres, err := json.Marshal(res)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				return
 			}
 			w.Write(jsonres)
@@ -152,6 +161,7 @@ func register_all_events_request_handler(r *mux.Router, db_connecter *sql.DB, re
 		}
 		jsonres, err := json.Marshal(responce)
 		if err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			return
 		}
 		w.Write(jsonres)
