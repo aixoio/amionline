@@ -22,7 +22,7 @@ func Start(con *config.ConfigData) {
 
 		resp, err := http.Get(con.TargetIP)
 		if err != nil {
-			logger.Warn().Println("Found error:", err.Error())
+			logger.Warn().Println("Found intended error:", err.Error())
 		} else {
 			resp.Body.Close()
 		}
