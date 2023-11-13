@@ -6,8 +6,3 @@ type EventData struct {
 	Target_ip string `json:"target_ip"`
 	Time_of_request uint64 `json:"time_of_request"`
 }
-
-type EventData_Responce struct {
-	Success bool `json:"success"`
-	Error_msg string `json:"error_msg"`
-}
