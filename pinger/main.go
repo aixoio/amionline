@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/aixoio/amionline/logger"
 	"github.com/aixoio/amionline/pinger/config"
+	"github.com/aixoio/amionline/pinger/events"
 )
 
 func main() {
@@ -14,7 +15,6 @@ func main() {
 		return
 	}
 
-	logger.Info().Println(con)
-	
-	logger.Info().Println("Hello world!")
+	events.Start(con)
+
 }
