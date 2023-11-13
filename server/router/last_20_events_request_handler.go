@@ -28,6 +28,7 @@ func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB
 		err := json.Unmarshal([]byte(redis_s), &last_20_cached)
 		canusecache := true
 		if err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			canusecache = false
 		}
 
@@ -42,6 +43,7 @@ func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB
 			}
 			jsonres, err := json.Marshal(result)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				return
 			}
 			w.Write(jsonres)
@@ -52,6 +54,7 @@ func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB
 
 		tx, err := db_connecter.Begin()
 		if err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			w.WriteHeader(http.StatusInternalServerError)
 			res := data.Last20Events_Responce{
 				Success: false,
@@ -59,6 +62,7 @@ func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB
 			}
 			jsonres, err := json.Marshal(res)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				return
 			}
 			w.Write(jsonres)
@@ -68,6 +72,7 @@ func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB
 
 		rows, err := tx.Query("SELECT id, success, time_ms, target_ip, time_of_request FROM events ORDER BY id DESC LIMIT 20")
 		if err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			w.WriteHeader(http.StatusInternalServerError)
 			res := data.Last20Events_Responce{
 				Success: false,
@@ -75,6 +80,7 @@ func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB
 			}
 			jsonres, err := json.Marshal(res)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				return
 			}
 			w.Write(jsonres)
@@ -96,6 +102,7 @@ func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB
 
 			err := rows.Scan(&id, &success, &time_ms, &target_ip, &time_of_request)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				w.WriteHeader(http.StatusInternalServerError)
 				res := data.Last20Events_Responce{
 					Success: false,
@@ -103,6 +110,7 @@ func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB
 				}
 				jsonres, err := json.Marshal(res)
 				if err != nil {
+					logger.Error().Printf("Found error: %s\n", err.Error())
 					return
 				}
 				w.Write(jsonres)
@@ -125,6 +133,7 @@ func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB
 		}
 		cache_bytes, err := json.Marshal(data_to_cache)
 		if err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			w.WriteHeader(http.StatusInternalServerError)
 			res := data.Last20Events_Responce{
 				Success: false,
@@ -132,6 +141,7 @@ func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB
 			}
 			jsonres, err := json.Marshal(res)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				return
 			}
 			w.Write(jsonres)
@@ -151,6 +161,7 @@ func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB
 		}
 		jsonres, err := json.Marshal(responce)
 		if err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			return
 		}
 		w.Write(jsonres)
