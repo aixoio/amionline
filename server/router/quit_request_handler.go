@@ -33,7 +33,7 @@ func register_quit_request_handler(db_connecter *sql.DB, r *mux.Router, config_d
 
 		value, err := strconv.Atoi(value_str)
 		if err != nil {
-			logger.Error().Printf("Found error: %s\n", err.Error())
+			logger.Warn().Printf("Found intended error: %s\n", err.Error())
 			value = 0
 		}
 		value++
