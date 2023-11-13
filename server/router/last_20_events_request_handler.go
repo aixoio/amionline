@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"time"
 
@@ -95,7 +94,6 @@ func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB
 
 			err := rows.Scan(&id, &success, &time_ms, &target_ip, &time_of_request)
 			if err != nil {
-				fmt.Println(err)
 				w.WriteHeader(http.StatusInternalServerError)
 				res := data.Last20Events_Responce{
 					Success: false,
