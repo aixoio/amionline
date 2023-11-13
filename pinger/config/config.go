@@ -10,6 +10,7 @@ import (
 type ConfigData struct {
 	TargetIP string `json:"target_ip"`
 	IntervalSeconds uint64 `json:"interval_seconds"`
+	ServerIP string `json:"server_ip"`
 }
 
 func LoadConfig(path string) (*ConfigData, error) {
