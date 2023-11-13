@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/aixoio/amionline/server/config"
+	"github.com/aixoio/amionline/server/logger"
 	"github.com/gorilla/mux"
 	"github.com/redis/go-redis/v9"
 )
@@ -13,6 +14,7 @@ func Start(db_connecter *sql.DB, redis_client *redis.Client, config_data *config
 	r := mux.NewRouter()
 	
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		logger.Info().Printf("Handling request to %s from %s\n", r.URL.Path, r.RemoteAddr)
 		w.Write([]byte("Hello world!"))
 	})
 

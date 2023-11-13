@@ -8,12 +8,14 @@ import (
 	"time"
 
 	"github.com/aixoio/amionline/server/data"
+	"github.com/aixoio/amionline/server/logger"
 	"github.com/gorilla/mux"
 	"github.com/redis/go-redis/v9"
 )
 
 func register_last_20_events_request_handler(r *mux.Router, db_connecter *sql.DB, redis_client *redis.Client) {
 	r.HandleFunc("/events/last/20", func(w http.ResponseWriter, r *http.Request) {
+		logger.Info().Printf("Handling request to %s from %s\n", r.URL.Path, r.RemoteAddr)
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Access-Control-Allow-Headers", "*")
         w.Header().Set("Access-Control-Allow-Origin", "*")

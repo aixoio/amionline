@@ -13,12 +13,14 @@ import (
 	"github.com/aixoio/amionline/server/config"
 	"github.com/aixoio/amionline/server/data"
 	"github.com/aixoio/amionline/server/db/mysql"
+	"github.com/aixoio/amionline/server/logger"
 	"github.com/gorilla/mux"
 	"github.com/redis/go-redis/v9"
 )
 
 func register_quit_request_handler(db_connecter *sql.DB, r *mux.Router, config_data *config.ConfigData, redis_client *redis.Client) {
 	r.HandleFunc("/quit", func(w http.ResponseWriter, r *http.Request) {
+		logger.Info().Printf("Handling request to %s from %s\n", r.URL.Path, r.RemoteAddr)
 		w.Header().Set("Content-Type", "application/json")
 		ip := r.RemoteAddr
 		key := fmt.Sprintf("quit:trys:%s", ip)

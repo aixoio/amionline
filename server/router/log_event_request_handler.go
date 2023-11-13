@@ -6,11 +6,13 @@ import (
 	"net/http"
 
 	"github.com/aixoio/amionline/server/data"
+	"github.com/aixoio/amionline/server/logger"
 	"github.com/gorilla/mux"
 )
 
 func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB) {
 	r.HandleFunc("/log/event", func(w http.ResponseWriter, r *http.Request) {
+		logger.Info().Printf("Handling request to %s from %s\n", r.URL.Path, r.RemoteAddr)
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Access-Control-Allow-Headers", "*")
         w.Header().Set("Access-Control-Allow-Origin", "*")
