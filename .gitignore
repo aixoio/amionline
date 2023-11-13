@@ -2,4 +2,5 @@
 */env.json
 dump.rdb
 server/server
+pinger/pinger
 go.work
