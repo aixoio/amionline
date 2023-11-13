@@ -3,10 +3,12 @@ package mysql
 import (
 	"database/sql"
 
+	"github.com/aixoio/amionline/server/logger"
 	_ "github.com/go-sql-driver/mysql"
 )
 
 func Connect(dblogin string) (*sql.DB, error) {
+	logger.Info().Println("Connecting to MySQL")
 	db, err := sql.Open("mysql", dblogin)
 	if err != nil {
 		return nil, err
