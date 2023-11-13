@@ -3,6 +3,8 @@ package config
 import (
 	"encoding/json"
 	"os"
+
+	"github.com/aixoio/amionline/server/logger"
 )
 
 type ConfigData struct {
@@ -12,6 +14,7 @@ type ConfigData struct {
 }
 
 func LoadConfig(path string) (*ConfigData, error) {
+	logger.Info().Println("Loading config file", path)
 	bytes, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
