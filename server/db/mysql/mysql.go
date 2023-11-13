@@ -3,7 +3,7 @@ package mysql
 import (
 	"database/sql"
 
-	"github.com/aixoio/amionline/server/logger"
+	"github.com/aixoio/amionline/logger"
 	_ "github.com/go-sql-driver/mysql"
 )
 

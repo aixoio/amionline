@@ -1,7 +1,7 @@
 package rediscache
 
 import (
-	"github.com/aixoio/amionline/server/logger"
+	"github.com/aixoio/amionline/logger"
 	"github.com/redis/go-redis/v9"
 )
 

@@ -4,7 +4,7 @@ import (
 	"github.com/aixoio/amionline/server/config"
 	"github.com/aixoio/amionline/server/db/mysql"
 	"github.com/aixoio/amionline/server/db/rediscache"
-	"github.com/aixoio/amionline/server/logger"
+	"github.com/aixoio/amionline/logger"
 	"github.com/aixoio/amionline/server/router"
 )
 

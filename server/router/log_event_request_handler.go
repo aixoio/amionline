@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/aixoio/amionline/server/data"
-	"github.com/aixoio/amionline/server/logger"
+	"github.com/aixoio/amionline/logger"
 	"github.com/gorilla/mux"
 )
 

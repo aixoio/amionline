@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/aixoio/amionline/server/logger"
+	"github.com/aixoio/amionline/logger"
 )
 
 type ConfigData struct {
