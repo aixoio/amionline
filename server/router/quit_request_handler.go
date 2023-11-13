@@ -33,6 +33,7 @@ func register_quit_request_handler(db_connecter *sql.DB, r *mux.Router, config_d
 
 		value, err := strconv.Atoi(value_str)
 		if err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			value = 0
 		}
 		value++
@@ -58,6 +59,7 @@ func register_quit_request_handler(db_connecter *sql.DB, r *mux.Router, config_d
 		var input data.QuitData
 		input_err := json.NewDecoder(r.Body).Decode(&input)
 		if input_err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			w.WriteHeader(http.StatusInternalServerError)
 			res := data.QuitData_Responce{
 				Success: false,
@@ -65,6 +67,7 @@ func register_quit_request_handler(db_connecter *sql.DB, r *mux.Router, config_d
 			}
 			jsonres, err := json.Marshal(res)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				return
 			}
 			w.Write(jsonres)
@@ -83,10 +86,12 @@ func register_quit_request_handler(db_connecter *sql.DB, r *mux.Router, config_d
 			}
 			jsonres, err := json.Marshal(res)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				return
 			}
 			w.Write(jsonres)
 
+			logger.Info().Println("Exiting...")
 			mysql.Disconnect(db_connecter)
 
 			os.Exit(0)
@@ -100,6 +105,7 @@ func register_quit_request_handler(db_connecter *sql.DB, r *mux.Router, config_d
 		}
 		jsonres, err := json.Marshal(res)
 		if err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			return
 		}
 		w.Write(jsonres)
