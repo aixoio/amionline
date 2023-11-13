@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `events` (
     `success` BOOLEAN NOT NULL,
     `time_ms` DOUBLE NOT NULL,
     `target_ip` VARCHAR(255) NOT NULL,
-    `time_of_request` DATETIME NOT NULL,
+    `time_of_request` BIGINT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`)
 );
 
