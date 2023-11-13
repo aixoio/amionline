@@ -70,6 +70,10 @@ func register_quit_request_handler(db_connecter *sql.DB, r *mux.Router, config_d
 		}
 
 		if input.Pwd == config_data.Quitpwd {
+
+			ctx := context.Background()
+			redis_client.Del(ctx, key)
+
 			w.WriteHeader(http.StatusOK)
 			res := data.QuitData_Responce{
 				Success: true,
