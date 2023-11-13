@@ -6,10 +6,13 @@ import (
 	"github.com/aixoio/amionline/server/config"
 	"github.com/aixoio/amionline/server/db/mysql"
 	"github.com/aixoio/amionline/server/db/rediscache"
+	"github.com/aixoio/amionline/server/logger"
 	"github.com/aixoio/amionline/server/router"
 )
 
 func main() {
+
+	logger.Init()
 	
 	config, err := config.LoadConfig("env.json")
 	if err != nil {
