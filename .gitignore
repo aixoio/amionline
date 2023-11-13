@@ -1,5 +1,5 @@
 .vscode
-server/env.json
+*/env.json
 dump.rdb
 server/server
 go.work
