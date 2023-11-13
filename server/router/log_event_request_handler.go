@@ -19,6 +19,7 @@ func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB) {
 
 		tx, err := db_connecter.Begin()
 		if err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			w.WriteHeader(http.StatusInternalServerError)
 			res := data.EventData_Responce{
 				Success: false,
@@ -26,6 +27,7 @@ func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB) {
 			}
 			jsonres, err := json.Marshal(res)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				return
 			}
 			w.Write(jsonres)
@@ -37,6 +39,7 @@ func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB) {
 
 		json_err := json.NewDecoder(r.Body).Decode(&event_data)
 		if json_err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			w.WriteHeader(http.StatusInternalServerError)
 			res := data.EventData_Responce{
 				Success: false,
@@ -44,6 +47,7 @@ func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB) {
 			}
 			jsonres, err := json.Marshal(res)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				return
 			}
 			w.Write(jsonres)
@@ -54,6 +58,7 @@ func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB) {
 							event_data.Success, event_data.Time_ms, event_data.Target_ip, event_data.Time_of_request)
 		rows_added, extra_err := res.RowsAffected()
 		if err != nil || rows_added != 1 || extra_err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			w.WriteHeader(http.StatusInternalServerError)
 			res := data.EventData_Responce{
 				Success: false,
@@ -61,6 +66,7 @@ func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB) {
 			}
 			jsonres, err := json.Marshal(res)
 			if err != nil {
+				logger.Error().Printf("Found error: %s\n", err.Error())
 				return
 			}
 			w.Write(jsonres)
@@ -73,6 +79,7 @@ func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB) {
 		}
 		jsonres, err := json.Marshal(responce)
 		if err != nil {
+			logger.Error().Printf("Found error: %s\n", err.Error())
 			return
 		}
 		w.Write(jsonres)
