@@ -1,5 +1,5 @@
 <template>
   <div>
-    <h1 class="flex justify-center p-2 m-4 text-gray-800 text-3xl">Hello world!</h1>
+    <h1 class="center p-2 m-4 title">Am I Online?</h1>
   </div>
 </template>

@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.center {
+    @apply flex justify-center
+}
+
+.title {
+    @apply text-gray-800 text-3xl
+}
