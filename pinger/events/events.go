@@ -51,7 +51,7 @@ func Start(con *config.ConfigData) {
 			continue
 		}
 
-		_, err = http.Post(con.ServerIP + "/log/event", "application/json", bytes.NewBuffer(resbytes))
+		_, err = http.Post(con.ServerIP + "/api/log/event", "application/json", bytes.NewBuffer(resbytes))
 		if err != nil {
 			logger.Error().Println("Found error:", err.Error())
 			continue
