@@ -2,10 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+$white: #eee;
+$black: #222;
+
+body {
+    background-color: $white;
+    @media (prefers-color-scheme: dark) {
+        background-color: $black;
+    }
+}
+
 .center {
     @apply flex justify-center
 }
 
 .title {
-    @apply text-gray-800 text-3xl
+    @apply text-3xl;
+    color: $black;
+    @media (prefers-color-scheme: dark) {
+        color: $white;
+    }
 }
