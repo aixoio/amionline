@@ -7,14 +7,14 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/aixoio/amionline/server/data"
 	"github.com/aixoio/amionline/logger"
+	"github.com/aixoio/amionline/server/data"
 	"github.com/gorilla/mux"
 	"github.com/redis/go-redis/v9"
 )
 
 func register_all_events_request_handler(r *mux.Router, db_connecter *sql.DB, redis_client *redis.Client) {
-	r.HandleFunc("/events", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/events", func(w http.ResponseWriter, r *http.Request) {
 		logger.Info().Printf("Handling request to %s from %s\n", r.URL.Path, r.RemoteAddr)
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Access-Control-Allow-Headers", "*")
