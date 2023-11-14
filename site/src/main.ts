@@ -1,3 +1,5 @@
+import "@/assets/scss/master.scss"
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
