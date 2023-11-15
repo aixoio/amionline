@@ -27,4 +27,8 @@ func main() {
 		os.Exit(0)
 	}()
 
+	open := make(chan bool)
+
+	<- open
+
 }
