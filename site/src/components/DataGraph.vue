@@ -7,8 +7,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import is_dark from "../assets/ts/is_dark"
-import { get_all_events, get_last_20_events, type Event } from "../assets/ts/api"
+import { get_last_20_events, type Event } from "../assets/ts/api"
 import { Chart, type ChartItem } from "chart.js/auto"
 
 const $graph = ref((null as unknown) as HTMLCanvasElement)
