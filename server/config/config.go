@@ -11,6 +11,8 @@ type ConfigData struct {
 	Mysqldb string `json:"mysqldb"`
 	Redisurl string `json:"redisurl"`
 	Quitpwd string `json:"quitpwd"`
+	UncachedRoutes bool `json:"uncached_routes"`
+	AutoClearCache bool `json:"auto_clear_cache"`
 }
 
 func LoadConfig(path string) (*ConfigData, error) {
