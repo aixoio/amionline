@@ -21,6 +21,4 @@ func Start(con *config.ConfigData) {
 
 	}
 
-	wg.Wait()
-
 }
