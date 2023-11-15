@@ -18,7 +18,7 @@ func Start(db_connecter *sql.DB, redis_client *redis.Client, config_data *config
 		w.Write([]byte("Hello world!"))
 	})
 
-	register_log_event_request_handler(r, db_connecter, config_data)
+	register_log_event_request_handler(r, db_connecter, config_data, redis_client)
 	register_quit_request_handler(db_connecter, r, config_data, redis_client)
 	register_last_20_events_request_handler(r, db_connecter, redis_client)
 	register_all_events_request_handler(r, db_connecter, redis_client)

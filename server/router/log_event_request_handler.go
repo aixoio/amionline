@@ -1,6 +1,7 @@
 package router
 
 import (
+	"context"
 	"database/sql"
 	"encoding/json"
 	"net/http"
@@ -9,9 +10,10 @@ import (
 	"github.com/aixoio/amionline/server/config"
 	"github.com/aixoio/amionline/server/data"
 	"github.com/gorilla/mux"
+	"github.com/redis/go-redis/v9"
 )
 
-func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB, config_data *config.ConfigData) {
+func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB, config_data *config.ConfigData, redis_client *redis.Client) {
 	r.HandleFunc("/api/log/event", func(w http.ResponseWriter, r *http.Request) {
 		logger.Info().Printf("Handling request to %s from %s\n", r.URL.Path, r.RemoteAddr)
 		w.Header().Set("Content-Type", "application/json")
@@ -72,6 +74,11 @@ func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB, con
 			}
 			w.Write(jsonres)
 			return
+		}
+
+		if config_data.AutoClearCache {
+			ctx := context.Background()
+			redis_client.Del(ctx, "events:all", "events:last:20")
 		}
 
 		w.WriteHeader(http.StatusOK)
