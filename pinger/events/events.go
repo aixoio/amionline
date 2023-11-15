@@ -15,6 +15,8 @@ func Start(con *config.ConfigData) {
 
 	for {
 
+		wg.Add(1)
+
 		go ping(con, &wg)
 
 		time.Sleep(time.Duration(con.IntervalSeconds) * time.Second)
