@@ -11,7 +11,7 @@
                 leave-active-class="transition duration-75 ease-in" leave-from-class="transform scale-100 opacity-100"
                 leave-to-class="transform scale-95 opacity-0">
                 <MenuItems
-                    class="absolute right-0 mt-2 w-40 p-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-black/20 shadow-lg ring-1 ring-black/5 dark:ring-white/5 focus:outline-none">
+                    class="absolute right-0 mt-2 w-fit p-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-black/20 shadow-lg ring-1 ring-black/5 dark:ring-white/5 focus:outline-none">
                     <div class="px-1 py-1">
                         <menu-item v-slot="{ active }">
                             <button :class="[
@@ -31,6 +31,24 @@
                                 All events
                             </button>
                         </menu-item>
+                        <menu-item v-slot="{ active }">
+                            <button :class="[
+                                active ? 'bg-indigo-500 text-white' : 'text-gray-900 dark:text-gray-100',
+                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                store_type == 'un20' ? 'bg-violet-500 text-white' : ''
+                            ]" class="cursor-pointer mt-3" @click="load_uncached_20">
+                                Uncached Last 20 events
+                            </button>
+                        </menu-item>
+                        <menu-item v-slot="{ active }">
+                            <button :class="[
+                                active ? 'bg-indigo-500 text-white' : 'text-gray-900 dark:text-gray-100',
+                                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                store_type == 'unall' ? 'bg-violet-500 text-white' : ''
+                            ]" class="cursor-pointer mt-3" @click="load_uncached_all">
+                                Uncached All events
+                            </button>
+                        </menu-item>
                     </div>
                 </MenuItems>
             </transition>
@@ -42,7 +60,7 @@
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue"
 import { ChevronDownIcon } from "@heroicons/vue/20/solid"
 import { storeToRefs } from "pinia"
-import { get_all_events, get_last_20_events } from "../assets/ts/api"
+import { get_all_events, get_all_uncached_events, get_last_20_events, get_last_20_uncached_events } from "../assets/ts/api"
 import { useDataStore } from "../stores/datastore"
 
 const datastore = useDataStore()
@@ -61,6 +79,22 @@ async function load_all() {
     const data = await get_all_events()
     datastore.loaded = true
     datastore.store_type = "all"
+    datastore.dataset = data
+}
+
+async function load_uncached_20() {
+    datastore.loaded = false
+    const data = await get_last_20_uncached_events()
+    datastore.loaded = true
+    datastore.store_type = "un20"
+    datastore.dataset = data
+}
+
+async function load_uncached_all() {
+    datastore.loaded = false
+    const data = await get_all_uncached_events()
+    datastore.loaded = true
+    datastore.store_type = "unall"
     datastore.dataset = data
 }
 
