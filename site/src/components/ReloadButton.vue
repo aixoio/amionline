@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { ArrowPathIcon } from "@heroicons/vue/20/solid"
 import { useDataStore } from "../stores/datastore";
-import { load_20, load_all } from "@/assets/ts/loader";
+import { load_20, load_all, load_uncached_20, load_uncached_all } from "@/assets/ts/loader";
 
 const datastore = useDataStore()
 
@@ -20,10 +20,10 @@ function reload() {
             load_all()
             break;
         case "un20":
-            load_20()
+            load_uncached_20()
             break;
         case "unall":
-            load_all()
+            load_uncached_all()
             break;
     }
 }
