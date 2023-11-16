@@ -3,6 +3,7 @@
     <h1 class="center p-2 m-4 title">Am I Online?</h1>
     <nav>
       <OptionsMenu></OptionsMenu>
+      <ReloadButton></ReloadButton>
     </nav>
     <DataGraph v-if="canshowgraph" class="m-8 center"></DataGraph>
   </div>
@@ -11,6 +12,7 @@
 <script setup lang="ts">
 import DataGraph from '@/components/DataGraph.vue';
 import OptionsMenu from '@/components/OptionsMenu.vue';
+import ReloadButton from '@/components/ReloadButton.vue';
 import { storeToRefs } from 'pinia';
 import { onMounted, ref, watch } from 'vue';
 import { get_last_20_events } from '../assets/ts/api';
