@@ -10,6 +10,7 @@ import { onMounted, ref } from "vue";
 import { get_last_20_events, type Event } from "../assets/ts/api"
 import { Chart, type ChartItem } from "chart.js/auto"
 import { useDataStore } from "../stores/datastore"
+import { storeToRefs } from "pinia";
 
 const $graph = ref((null as unknown) as HTMLCanvasElement)
 
@@ -82,15 +83,14 @@ function parse_color(events: Event[]): string[] {
 }
 
 const datastore = useDataStore()
-let dataset = datastore.data
+const { dataset } = storeToRefs(datastore)
 
 onMounted(async () => {
 
     
     if (!datastore.loaded) {
         const data = await get_last_20_events()
-        datastore.data = data
-        dataset = data
+        datastore.dataset = data
     }
 
     new Chart($graph.value! as ChartItem, {
@@ -103,7 +103,7 @@ onMounted(async () => {
                 tooltip: {
                     callbacks: {
                         label: (i) => {
-                            const item = (dataset.events as Event[])[i.dataIndex]
+                            const item = (dataset.value.events as Event[])[i.dataIndex]
                             
                             const time = new Date(item.time_of_request).toLocaleString()
                             const success = item.success ? "online" : "offline"
@@ -119,12 +119,12 @@ onMounted(async () => {
             responsive: true,
         },
         data: {
-            labels: parse_date(dataset.events as Event[]),
+            labels: parse_date(dataset.value.events as Event[]),
             datasets: [
                 {
                     label: "",
-                    backgroundColor: parse_color(dataset.events as Event[]),
-                    data: parse_time_ms(dataset.events as Event[]),
+                    backgroundColor: parse_color(dataset.value.events as Event[]),
+                    data: parse_time_ms(dataset.value.events as Event[]),
                 }
             ]
         }

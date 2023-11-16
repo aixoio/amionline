@@ -3,14 +3,14 @@ import { defineStore } from "pinia"
 import { ref } from "vue"
 
 export const useDataStore = defineStore("data-store", () => {
-    const data = ref((null as unknown) as Events_Responce)
+    const dataset = ref((null as unknown) as Events_Responce)
 
     const loaded = ref(false)
 
     const store_type = ref("unloaded")
 
     return {
-        data,
+        dataset,
         loaded,
         store_type,
     }
