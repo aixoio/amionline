@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { get_last_20_events, type Event } from "../assets/ts/api"
+import { type Event } from "../assets/ts/api"
 import { Chart, type ChartItem } from "chart.js/auto"
 import { useDataStore } from "../stores/datastore"
 import { storeToRefs } from "pinia";
