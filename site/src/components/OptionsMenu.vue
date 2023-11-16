@@ -31,13 +31,19 @@
                                 All events
                             </button>
                         </menu-item>
+                    </div>
+                    <div class="px-1 py-1">
                         <menu-item v-slot="{ active }">
                             <button :class="[
                                 active ? 'bg-indigo-500 text-white' : 'text-gray-900 dark:text-gray-100',
                                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                 store_type == 'un20' ? 'bg-violet-500 text-white' : ''
                             ]" class="cursor-pointer mt-3" @click="load_uncached_20">
-                                Uncached Last 20 events
+                                <div>
+                                    <span
+                                        class="bg-red-500 m-1.5 p-1 w-fit uppercase rounded-lg text-sm inline-block font-bold">Uncached</span>
+                                    Last 20 events
+                                </div>
                             </button>
                         </menu-item>
                         <menu-item v-slot="{ active }">
@@ -46,7 +52,11 @@
                                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                 store_type == 'unall' ? 'bg-violet-500 text-white' : ''
                             ]" class="cursor-pointer mt-3" @click="load_uncached_all">
-                                Uncached All events
+                                <div>
+                                    <span
+                                        class="bg-red-500 m-1.5 p-1 w-fit uppercase rounded-lg text-sm inline-block font-bold">Uncached</span>
+                                    All events
+                                </div>
                             </button>
                         </menu-item>
                     </div>
