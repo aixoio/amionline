@@ -72,9 +72,12 @@ function parse_color(events: Event[]): string[] {
     const out: string[] = []
 
     for (let i = 0; i < e.length; i++) {
-        if (e[i].time_ms <= 75 && e[i].success) {
+        if (!e[i].success) {
+            out.push("#6b0000") // dark red
+        }
+        else if (e[i].time_ms <= 75) {
             out.push("#36ff17") // green
-        } else if (e[i].time_ms > 100 || !e[i].success) {
+        } else if (e[i].time_ms > 100) {
             out.push("#ff1717") // red
         } else {
             out.push("#ffae17") // orange
