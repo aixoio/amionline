@@ -11,6 +11,9 @@ import { get_last_20_events, type Event } from "../assets/ts/api"
 import { Chart, type ChartItem } from "chart.js/auto"
 import { useDataStore } from "../stores/datastore"
 import { storeToRefs } from "pinia";
+import zoomPlugin from "chartjs-plugin-zoom"
+
+Chart.register(zoomPlugin)
 
 const $graph = ref((null as unknown) as HTMLCanvasElement)
 
@@ -82,6 +85,14 @@ function parse_color(events: Event[]): string[] {
 
 }
 
+function longest_request_time(events: Event[]): number {
+    let bigest = 0;
+    for (let i = 0; i < events.length; i++) {
+        bigest = Math.max(bigest, events[i].time_ms)
+    }
+    return bigest
+}
+
 const datastore = useDataStore()
 const { dataset } = storeToRefs(datastore)
 
@@ -108,6 +119,23 @@ onMounted(async () => {
 
                         }
                     },
+                },
+                zoom: {
+                    zoom: {
+                        wheel: {
+                            enabled: true,
+                        },
+                        pinch: {
+                            enabled: true,
+                        },
+                        mode: "xy",
+                        drag: {
+                            enabled: true,
+                        },
+                    },
+                    limits: {
+                        y: {min: 0, max: longest_request_time(dataset.value.events as Event[]) + 10}
+                    }
                 },
             },
             responsive: true,
