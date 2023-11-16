@@ -80,27 +80,6 @@ function parse_color(events: Event[]): string[] {
 
 }
 
-function parse_legends(events: Event[]): string[] {
-    const e = events.sort((a, b) => {
-        if (a.time_of_request > b.time_of_request) {
-            return -1;
-        }
-        if (a.time_of_request < b.time_of_request) {
-            return 1;
-        }
-        return 0;
-    })
-
-    const out: string[] = []
-
-    for (let i = 0; i < e.length; i++) {
-        out.push(`Time/ms`)
-    }
-
-    return out
-
-}
-
 onMounted(async () => {
 
     const dataset = await get_last_20_events()
