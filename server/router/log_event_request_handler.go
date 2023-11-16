@@ -76,7 +76,7 @@ func register_log_event_request_handler(r *mux.Router, db_connecter *sql.DB, con
 			return
 		}
 
-		if config_data.AutoClearCache_Full {
+		if config_data.AutoClearCache_Full || (config_data.AutoClearCache_All && config_data.AutoClearCache_20) {
 			ctx := context.Background()
 			redis_client.Del(ctx, "events:all", "events:last:20")
 		} else if config_data.AutoClearCache_20 {
