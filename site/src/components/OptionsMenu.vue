@@ -70,42 +70,11 @@
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue"
 import { ChevronDownIcon } from "@heroicons/vue/20/solid"
 import { storeToRefs } from "pinia"
-import { get_all_events, get_all_uncached_events, get_last_20_events, get_last_20_uncached_events } from "../assets/ts/api"
+import { load_20, load_all, load_uncached_20, load_uncached_all } from "@/assets/ts/loader"
 import { useDataStore } from "../stores/datastore"
 
 const datastore = useDataStore()
 const { store_type } = storeToRefs(datastore)
 
-async function load_20() {
-    datastore.loaded = false
-    const data = await get_last_20_events()
-    datastore.loaded = true
-    datastore.store_type = "20"
-    datastore.dataset = data
-}
-
-async function load_all() {
-    datastore.loaded = false
-    const data = await get_all_events()
-    datastore.loaded = true
-    datastore.store_type = "all"
-    datastore.dataset = data
-}
-
-async function load_uncached_20() {
-    datastore.loaded = false
-    const data = await get_last_20_uncached_events()
-    datastore.loaded = true
-    datastore.store_type = "un20"
-    datastore.dataset = data
-}
-
-async function load_uncached_all() {
-    datastore.loaded = false
-    const data = await get_all_uncached_events()
-    datastore.loaded = true
-    datastore.store_type = "unall"
-    datastore.dataset = data
-}
 
 </script>
