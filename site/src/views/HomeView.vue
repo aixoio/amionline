@@ -1,9 +1,13 @@
 <template>
   <div>
-    <h1 class="center p-2 m-4 title">Am I Online?</h1>
-    <nav>
-      <OptionsMenu></OptionsMenu>
-      <ReloadButton></ReloadButton>
+    <nav class="flex justify-start mt-5 border-b border-b-black/20 p-4">
+      <h1 class="title">Am I Online?</h1>
+      <div class="flex gap-4">
+        <OptionsMenu></OptionsMenu>
+        <ReloadButton></ReloadButton>
+      </div>
+      <span v-show="dataset != null && !dataset.cached"
+        class="bg-red-500 m-1.5 p-1 w-fit uppercase rounded-lg text-sm inline-block font-bold text-white">Uncached</span>
     </nav>
     <DataGraph v-if="canshowgraph" class="m-8 center"></DataGraph>
   </div>
@@ -19,7 +23,7 @@ import { get_last_20_events } from '../assets/ts/api';
 import { useDataStore } from '../stores/datastore';
 
 const datastore = useDataStore()
-const { loaded } = storeToRefs(datastore)
+const { loaded, dataset } = storeToRefs(datastore)
 
 onMounted(async () => {
   const data = await get_last_20_events()
