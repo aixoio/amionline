@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@headlessui/vue':
+    specifier: ^1.7.16
+    version: 1.7.16(vue@3.3.8)
   chart.js:
     specifier: ^4.4.0
     version: 4.4.0
@@ -300,6 +303,15 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@headlessui/vue@1.7.16(vue@3.3.8):
+    resolution: {integrity: sha512-nKT+nf/q6x198SsyK54mSszaQl/z+QxtASmgMEJtpxSX2Q0OPJX0upS/9daDyiECpeAsvjkoOrm2O/6PyBQ+Qg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.3.8(typescript@5.2.2)
+    dev: false
 
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
