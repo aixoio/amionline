@@ -10,6 +10,10 @@ body {
     @media (prefers-color-scheme: dark) {
         background-color: $black;
     }
+    color: $black;
+    @media (prefers-color-scheme: dark) {
+        color: $white;
+    }
 }
 
 .center {
@@ -18,8 +22,4 @@ body {
 
 .title {
     @apply text-3xl;
-    color: $black;
-    @media (prefers-color-scheme: dark) {
-        color: $white;
-    }
 }
