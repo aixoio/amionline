@@ -12,7 +12,9 @@ type ConfigData struct {
 	Redisurl string `json:"redisurl"`
 	Quitpwd string `json:"quitpwd"`
 	UncachedRoutes bool `json:"uncached_routes"`
-	AutoClearCache bool `json:"auto_clear_cache"`
+	AutoClearCache_Full bool `json:"auto_clear_cache_full"`
+	AutoClearCache_20 bool `json:"auto_clear_cache_20"`
+	AutoClearCache_All bool `json:"auto_clear_cache_all"`
 }
 
 func LoadConfig(path string) (*ConfigData, error) {
