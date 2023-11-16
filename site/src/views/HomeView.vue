@@ -5,9 +5,9 @@
       <div class="flex gap-4">
         <OptionsMenu></OptionsMenu>
         <ReloadButton></ReloadButton>
+        <span v-show="dataset != null && !dataset.cached"
+          class="bg-red-500 m-1.5 p-1 w-fit uppercase rounded-lg text-sm inline-block font-bold text-white">Uncached</span>
       </div>
-      <span v-show="dataset != null && !dataset.cached"
-        class="bg-red-500 m-1.5 p-1 w-fit uppercase rounded-lg text-sm inline-block font-bold text-white">Uncached</span>
     </nav>
     <DataGraph v-if="canshowgraph" class="m-8 center"></DataGraph>
   </div>
