@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed top-16 w-56 text-right">
+    <div class="relative top-16 w-56 text-right">
         <Menu as="div" class="relative inline-block text-left">
             <MenuButton
                 class="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
@@ -11,7 +11,7 @@
                 leave-active-class="transition duration-75 ease-in" leave-from-class="transform scale-100 opacity-100"
                 leave-to-class="transform scale-95 opacity-0">
                 <MenuItems
-                    class="absolute right-0 mt-2 w-fit p-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white/20 dark:bg-black/20 shadow-lg ring-1 ring-black/5 dark:ring-white/5 focus:outline-none">
+                    class="backdrop-blur-lg absolute right-0 mt-2 w-fit p-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white/20 dark:bg-black/20 shadow-lg ring-1 ring-black/5 dark:ring-white/5 focus:outline-none">
                     <div class="px-1 py-1">
                         <menu-item v-slot="{ active }">
                             <button :class="[
