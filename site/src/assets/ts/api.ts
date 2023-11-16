@@ -28,3 +28,23 @@ export async function get_last_20_events(): Promise<Events_Responce> {
     
     return json as Events_Responce
 }
+
+export async function get_all_uncached_events(): Promise<Events_Responce> {
+    const request = await fetch("/api/events/uncached")
+    if (request.status == 404) {
+        return await get_all_events()
+    }
+    const json = await request.json()
+    
+    return json as Events_Responce
+}
+
+export async function get_last_20_uncached_events(): Promise<Events_Responce> {
+    const request = await fetch("/api/events/uncached/last/20")
+    if (request.status == 404) {
+        return await get_last_20_events()
+    }
+    const json = await request.json()
+    
+    return json as Events_Responce
+}
