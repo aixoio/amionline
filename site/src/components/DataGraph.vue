@@ -87,12 +87,6 @@ const { dataset } = storeToRefs(datastore)
 
 onMounted(async () => {
 
-    
-    if (!datastore.loaded) {
-        const data = await get_last_20_events()
-        datastore.dataset = data
-    }
-
     new Chart($graph.value! as ChartItem, {
         type: 'bar',
         options: {
