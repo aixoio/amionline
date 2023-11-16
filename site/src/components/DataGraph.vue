@@ -9,6 +9,7 @@
 import { onMounted, ref } from "vue";
 import { get_last_20_events, type Event } from "../assets/ts/api"
 import { Chart, type ChartItem } from "chart.js/auto"
+import { useDataStore } from "../stores/datastore"
 
 const $graph = ref((null as unknown) as HTMLCanvasElement)
 
@@ -80,9 +81,17 @@ function parse_color(events: Event[]): string[] {
 
 }
 
+const datastore = useDataStore()
+let dataset = datastore.data
+
 onMounted(async () => {
 
-    const dataset = await get_last_20_events()
+    
+    if (!datastore.loaded) {
+        const data = await get_last_20_events()
+        datastore.data = data
+        dataset = data
+    }
 
     new Chart($graph.value! as ChartItem, {
         type: 'bar',
