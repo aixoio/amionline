@@ -16,8 +16,10 @@
             </nav>
         </nav>
         <div class="grid md:grid-cols-3 grid-cols-1 w-full h-full">
-            <SuccessSplitGraphVue v-if="canshowresults" class="m-8 center w-full h-full"></SuccessSplitGraphVue>
-            <TimeingSplitGraph v-if="canshowresults" class="m-8 center w-full h-full"></TimeingSplitGraph>
+            <div class="grid grid-cols-2 w-full h-full">
+                <SuccessSplitGraphVue v-if="canshowresults" class="m-8 center w-full h-full"></SuccessSplitGraphVue>
+                <TimeingSplitGraph v-if="canshowresults" class="m-8 center w-full h-full"></TimeingSplitGraph>
+            </div>
             <TimeMSData v-if="canshowresults" class="m-8"></TimeMSData>
         </div>
         <Loading v-if="!loaded" class="flex justify-center items-center h-full mt-56"></Loading>
