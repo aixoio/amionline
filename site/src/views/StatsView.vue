@@ -15,6 +15,7 @@
                 <HomeLink class="flex items-center"></HomeLink>
             </nav>
         </nav>
+        <SuccessSplitGraphVue v-if="canshowresults" class="m-8 center w-[25%] h-[25%]"></SuccessSplitGraphVue>
         <Loading v-if="!loaded" class="flex justify-center items-center h-full mt-56"></Loading>
     </div>
 </template>
@@ -24,19 +25,27 @@ import OptionsMenu from '@/components/OptionsMenu.vue';
 import HomeLink from "@/components/HomeLink.vue"
 import ReloadButton from '@/components/ReloadButton.vue';
 import Loading from '@/components/Loading.vue';
+import SuccessSplitGraphVue from '@/components/SuccessSplitGraph.vue';
 import { storeToRefs } from "pinia"
 import { useDataStore } from "../stores/datastore"
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { get_last_20_events } from '../assets/ts/api';
 
 const datastore = useDataStore()
 const { loaded, dataset } = storeToRefs(datastore)
 
+let canshowresults = ref(false)
+
 onMounted(async () => {
-  const data = await get_last_20_events()
-  datastore.dataset = data
-  datastore.loaded = true
-  datastore.store_type = "20"
+    if (dataset.value != null) {
+        canshowresults.value = true
+        return
+    }
+    const data = await get_last_20_events()
+    datastore.dataset = data
+    datastore.loaded = true
+    datastore.store_type = "20"
+    canshowresults.value = true
 })
 
 const get_event_name = computed(() => {
@@ -54,6 +63,10 @@ const get_event_name = computed(() => {
             return "All events"
             break;
     }
+})
+
+watch(loaded, (val) => {
+  canshowresults.value = val
 })
 
 </script>

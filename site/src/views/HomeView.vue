@@ -34,6 +34,10 @@ const datastore = useDataStore()
 const { loaded, dataset } = storeToRefs(datastore)
 
 onMounted(async () => {
+  if (dataset.value != null) {
+    canshowgraph.value = true
+    return
+  }
   const data = await get_last_20_events()
   datastore.dataset = data
   datastore.loaded = true
