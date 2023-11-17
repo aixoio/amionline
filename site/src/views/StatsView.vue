@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="flex w-full min-w-full border-b border-b-black/20 pb-4 justify-between">
+        <nav class="md:flex w-full min-w-full border-b border-b-black/20 pb-4 justify-between">
             <nav class="md:flex block justify-start mt-5 pt-4 pl-4 pr-4">
                 <h1 class="title">Am I Online? - Statistics</h1>
                 <div class="flex gap-4">
@@ -15,8 +15,8 @@
                 <HomeLink class="flex items-center"></HomeLink>
             </nav>
         </nav>
-        <div class="grid md:grid-cols-3 grid-cols-1 w-full h-full">
-            <div class="grid grid-cols-2 w-full h-full">
+        <div class="grid lg:grid-cols-2 grid-cols-1 lg:w-full w-[75%] h-full">
+            <div class="grid md:grid-cols-2 grid-cols-1 w-full h-full">
                 <SuccessSplitGraphVue v-if="canshowresults" class="m-8 center w-full h-full"></SuccessSplitGraphVue>
                 <TimeingSplitGraph v-if="canshowresults" class="m-8 center w-full h-full"></TimeingSplitGraph>
             </div>

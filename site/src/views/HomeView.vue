@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="flex w-full min-w-full border-b border-b-black/20 pb-4 justify-between">
+    <nav class="md:flex w-full min-w-full border-b border-b-black/20 pb-4 justify-between">
       <nav class="md:flex block justify-start mt-5 pt-4 pl-4 pr-4">
         <h1 class="title">Am I Online?</h1>
         <div class="flex gap-4">
