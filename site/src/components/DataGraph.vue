@@ -77,7 +77,7 @@ function parse_color(events: Event[]): string[] {
         }
         else if (e[i].time_ms <= 75) {
             out.push("#36ff17") // green
-        } else if (e[i].time_ms > 100) {
+        } else if (e[i].time_ms > 175) {
             out.push("#ff1717") // red
         } else {
             out.push("#ffae17") // orange
