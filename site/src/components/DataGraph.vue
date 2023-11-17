@@ -99,7 +99,7 @@ function longest_request_time(events: Event[]): number {
 const datastore = useDataStore()
 const { dataset } = storeToRefs(datastore)
 
-onMounted(async () => {
+onMounted(() => {
 
     new Chart($graph.value! as ChartItem, {
         type: 'bar',
