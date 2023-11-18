@@ -1,0 +1,75 @@
+version: "3"
+name: "amionline"
+services:
+  database:
+    build: ./database/
+    networks:
+      - network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "database"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./data/mysql/:/var/lib/mysql/
+  redis:
+    image: "redis"
+    networks:
+      - network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./data/redis/:/data/
+  server:
+    build: ./server/
+    networks:
+      - network
+    depends_on:
+      redis:
+        condition: service_healthy
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://server:9090/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - ENV_MYSQLDB=root:amionline@tcp(database:3306)/amionline
+      - ENV_REDISURL=redis:6379
+      - ENV_QUITPWD=amionline
+      - ENV_UNCACHEDROUTES=true
+      - ENV_AUTOCLEARCACHE_FULL=false
+      - ENV_AUTOCLEARCACHE_20=true
+      - ENV_AUTOCLEARCACHE_ALL=false
+  site:
+    build: ./site/
+    networks:
+      - network
+    depends_on:
+      redis:
+        condition: service_healthy
+      database:
+        condition: service_healthy
+      server:
+        condition: service_healthy
+  reverse-proxy:
+    build: ./reverse-proxy/
+    networks:
+      - network
+    ports:
+      - "80:80"
+    depends_on:
+      redis:
+        condition: service_healthy
+      database:
+        condition: service_healthy
+      server:
+        condition: service_healthy
+      site:
+        condition: service_started
+networks:
+  network:

@@ -4,3 +4,4 @@ dump.rdb
 server/server
 pinger/pinger
 go.work
+data/
