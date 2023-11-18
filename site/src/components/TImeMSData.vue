@@ -2,12 +2,12 @@
     <div>
         <h2 class="text-xl text">Time/ms data</h2>
         <div class="grid grid-cols-1 gap-0.5">
-            <span class="text block">Mean: <span class="font-bold">{{ get_mean }}</span></span>
-            <span class="text block">Max: <span class="font-bold">{{ get_max }}</span></span>
-            <span class="text block">Min: <span class="font-bold">{{ get_min }}</span></span>
-            <span class="text block">Median: <span class="font-bold">{{ get_median }}</span></span>
+            <span class="text block">Mean: <span class="font-bold">{{ get_mean }}ms</span></span>
+            <span class="text block">Max: <span class="font-bold">{{ get_max }}ms</span></span>
+            <span class="text block">Min: <span class="font-bold">{{ get_min }}ms</span></span>
+            <span class="text block">Median: <span class="font-bold">{{ get_median }}ms</span></span>
             <span class="text block">Mode: <span class="font-bold">{{ get_formated_mean }}</span></span>
-            <span class="text block">Range: <span class="font-bold">{{ get_range }}</span></span>
+            <span class="text block">Range: <span class="font-bold">{{ get_range }}ms</span></span>
         </div>
     </div>
 </template>
@@ -48,9 +48,9 @@ const get_formated_mean = computed(() => {
     const data = get_mode.value!
     for (let i = 0; i < data.length; i++) {
         if (i == data.length - 1) {
-            str += `${data[i]}`
+            str += `${data[i]}ms`
         } else {
-            str += `${data[i]}, `
+            str += `${data[i]}ms, `
         }
     }
     return str
