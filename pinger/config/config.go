@@ -41,7 +41,7 @@ func LoadConfigFromEnv() (*ConfigData, error) {
 	for i := 0; i < stu.NumField(); i++ {
 		env_name := fmt.Sprintf("ENV_%s", strings.ToUpper(typeof.Field(i).Name))
 		env_val := os.Getenv(env_name)
-		if env_val != "" {
+		if env_val == "" {
 			return nil, fmt.Errorf("empty env: %s", env_name)
 		}
 		field := stu.Field(i)
