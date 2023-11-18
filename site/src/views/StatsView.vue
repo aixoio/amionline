@@ -11,7 +11,8 @@
                         class="bg-red-500 flex items-center p-1 w-fit uppercase rounded-lg text-sm ml-2 mr-2 font-bold text-white">Uncached</span>
                 </div>
             </nav>
-            <nav class="flex justify-end m-3">
+            <nav class="flex justify-end m-3 gap-5">
+                <DownloadButton class="flex items-center"></DownloadButton>
                 <HomeLink class="flex items-center"></HomeLink>
             </nav>
         </nav>
@@ -34,6 +35,7 @@ import Loading from '@/components/Loading.vue';
 import SuccessSplitGraphVue from '@/components/SuccessSplitGraph.vue';
 import TimeingSplitGraph from '@/components/TimeingSplitGraph.vue';
 import TimeMSData from '@/components/TimeMSData.vue';
+import DownloadButton from '@/components/DownloadButton.vue';
 import { storeToRefs } from "pinia"
 import { useDataStore } from "../stores/datastore"
 import { computed, onMounted, ref, watch } from 'vue';
