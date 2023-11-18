@@ -18,9 +18,10 @@ run-prod:
 all: run-dev
 build: dev
 prod-build: prod
+final: clean prod-build
 
 clean:
 	$(GOC) clean
 
-.PHONY: dev all prod run-dev run-prod build prod-build
+.PHONY: dev all prod run-dev run-prod build prod-build final
 .DEFAULT_GOAL = all
