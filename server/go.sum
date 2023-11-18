@@ -1,3 +1,5 @@
+github.com/aixoio/amionline/logger v0.0.0-20231118080850-8ee983c5f65c h1:DYonnjAIRJUHkdZ+HooXG2G15B5wqTp3Ayh3Dvwh/Rw=
+github.com/aixoio/amionline/logger v0.0.0-20231118080850-8ee983c5f65c/go.mod h1:be2hhwWV33VGCwDKygSoR2J300q+cefrIfgz7z3mRaE=
 github.com/bsm/ginkgo/v2 v2.12.0 h1:Ny8MWAHyOepLGlLKYmXG4IEkioBysk6GpaRTLC8zwWs=
 github.com/bsm/ginkgo/v2 v2.12.0/go.mod h1:SwYbGRRDovPVboqFv0tPTcG1sN61LM1Z4ARdbAV9g4c=
 github.com/bsm/gomega v1.27.10 h1:yeMWxP2pV2fG3FgAODIY8EiRE3dy0aeFYt4l7wh6yKA=
