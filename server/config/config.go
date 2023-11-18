@@ -59,6 +59,12 @@ func LoadConfigFromEnv() (*ConfigData, error) {
 				return nil, fmt.Errorf("failed to parse boolean value for %s: %v", env_name, err)
 			}
 			field.SetBool(val)
+		case reflect.Uint64:
+			val, err := strconv.ParseUint(env_val, 10, 64)
+			if err != nil {
+				return nil, fmt.Errorf("failed to parse uint64 value for %s: %v", env_name, err)
+			}
+			field.SetUint(val)
 		default:
 			return nil, fmt.Errorf("unsupported field type for %s: %v", env_name, field.Kind())
 		}
