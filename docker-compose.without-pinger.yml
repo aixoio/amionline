@@ -71,22 +71,5 @@ services:
         condition: service_healthy
       site:
         condition: service_started
-  pinger:
-    build: ./pinger/
-    networks:
-      - network
-    depends_on:
-      redis:
-        condition: service_healthy
-      database:
-        condition: service_healthy
-      server:
-        condition: service_healthy
-      reverse-proxy:
-        condition: service_started
-    environment:
-      - ENV_TARGETIP=http://1.1.1.1
-      - ENV_INTERVALSECONDS=60
-      - ENV_SERVERIP=http://reverse-proxy:80
 networks:
   network:
