@@ -6,12 +6,13 @@
 
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { type Event } from "../assets/ts/api"
 import { Chart, type ChartItem } from "chart.js/auto"
 import { useDataStore } from "../stores/datastore"
 import { storeToRefs } from "pinia";
 import zoomPlugin from "chartjs-plugin-zoom"
+import { useDataGraphStore } from "@/stores/datagraphstore";
 
 Chart.register(zoomPlugin)
 
@@ -98,10 +99,12 @@ function longest_request_time(events: Event[]): number {
 
 const datastore = useDataStore()
 const { dataset } = storeToRefs(datastore)
+const datagraphstore = useDataGraphStore()
+const { tiggerZoomResetValue } = storeToRefs(datagraphstore)
 
 onMounted(() => {
 
-    new Chart($graph.value! as ChartItem, {
+    const chart = new Chart($graph.value! as ChartItem, {
         type: 'bar',
         options: {
             plugins: {
@@ -155,6 +158,10 @@ onMounted(() => {
         }
     })
 
+    watch(tiggerZoomResetValue, () => {
+        chart.resetZoom()
+    })
+    
 })
 
 
