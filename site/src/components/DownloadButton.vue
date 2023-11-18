@@ -48,14 +48,16 @@
                                                         active ? 'bg-indigo-500 text-white' : 'text-gray-900 dark:text-gray-100',
                                                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                                         download_as == 'JSON' ? 'bg-violet-500 text-white' : ''
-                                                    ]" class="cursor-pointer mt-3" @click="download_as = 'JSON'">JSON</button>
+                                                    ]" class="cursor-pointer mt-3"
+                                                        @click="download_as = 'JSON'">JSON</button>
                                                 </menu-item>
                                                 <menu-item v-slot="{ active }">
                                                     <button :class="[
                                                         active ? 'bg-indigo-500 text-white' : 'text-gray-900 dark:text-gray-100',
                                                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                                         download_as == 'CSV' ? 'bg-violet-500 text-white' : ''
-                                                    ]" class="cursor-pointer mt-3" @click="download_as = 'CSV'">CSV</button>
+                                                    ]" class="cursor-pointer mt-3"
+                                                        @click="download_as = 'CSV'">CSV</button>
                                                 </menu-item>
                                             </MenuItems>
                                         </transition>
@@ -90,11 +92,15 @@ import { ArrowDownOnSquareIcon, ChevronDownIcon } from '@heroicons/vue/24/outlin
 import { computed, ref } from 'vue';
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { useDataStore } from '../stores/datastore';
+import { unparse } from 'papaparse';
+import { storeToRefs } from 'pinia';
+import { useDownloadButtonStore } from '@/stores/downloadbuttonstore';
 
 const datastore = useDataStore()
 
 const can_show = ref(false)
-const download_as = ref("JSON")
+const downloadbuttonstore = useDownloadButtonStore()
+const { download_as } = storeToRefs(downloadbuttonstore)
 
 function show_popup() {
     can_show.value = true
@@ -105,6 +111,45 @@ function close_popup() {
 }
 
 function download() {
+
+    if (download_as.value == "JSON") {
+
+        const data = JSON.stringify(datastore.dataset)
+        const blob = new Blob([data], { type: "application/json" })
+        const data_url = URL.createObjectURL(blob)
+
+        const link = document.createElement("a")
+        link.hidden = true
+        link.href = data_url
+        link.download = `amionline-export-${new Date(Date.now()).toLocaleString()}-${datastore.store_type}.json`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(data_url)
+
+    }
+
+    if (download_as.value == "CSV") {
+        
+        const data = unparse(datastore.dataset.events!, {
+            header: true,
+            quotes: true,
+            quoteChar: `"`,
+        })
+        const blob = new Blob([data], { type: "text/csv" })
+        const data_url = URL.createObjectURL(blob)
+
+        const link = document.createElement("a")
+        link.hidden = true
+        link.href = data_url
+        link.download = `amionline-export-${new Date(Date.now()).toLocaleString()}-${datastore.store_type}.csv`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(data_url)
+
+    }
+
     close_popup()
 }
 
