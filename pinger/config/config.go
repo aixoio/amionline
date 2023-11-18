@@ -21,6 +21,7 @@ func LoadConfig(path string) (*ConfigData, error) {
 	logger.Info().Println("Loading config file", path)
 	bytes, err := os.ReadFile(path)
 	if err != nil {
+		logger.Warn().Printf("Cannot load file %s trying env config\n", path)
 		return LoadConfigFromEnv()
 	}
 
