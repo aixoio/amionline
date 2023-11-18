@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ArrowPathIcon class="w-8 h-8 dark:fill-white/50 fill-black/50 hover:dark:fill-white hover:fill-black cursor-pointer transition-all delay-50" @click="reload"></ArrowPathIcon>
+        <ArrowPathIcon class="w-8 h-8 text-gray-700 dark:text-gray-200 cursor-pointer" @click="reload"></ArrowPathIcon>
     </div>
 </template>
 

@@ -6,6 +6,7 @@
         <div class="flex gap-4">
           <OptionsMenu></OptionsMenu>
           <ReloadButton></ReloadButton>
+          <ResetDataGraphZoomButton></ResetDataGraphZoomButton>
           <span v-show="dataset != null && !dataset.cached"
             class="bg-red-500 flex items-center p-1 w-fit uppercase rounded-lg text-sm ml-2 mr-2 font-bold text-white">Uncached</span>
         </div>
@@ -27,6 +28,7 @@ import ReloadButton from '@/components/ReloadButton.vue';
 import Loading from '@/components/Loading.vue';
 import StatsLink from '@/components/StatsLink.vue';
 import DownloadButton from '@/components/DownloadButton.vue';
+import ResetDataGraphZoomButton from '@/components/ResetDataGraphZoomButton.vue';
 import { storeToRefs } from 'pinia';
 import { onMounted, ref, watch } from 'vue';
 import { get_last_20_events } from '../assets/ts/api';
