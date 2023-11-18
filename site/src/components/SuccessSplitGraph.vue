@@ -59,7 +59,7 @@ onMounted(() => {
             },
         },
         data: {
-            labels: ["Success", "Fail"],
+            labels: ["Online", "Offline"],
             datasets: [
                 {
                     backgroundColor: ["#5bff2e", "#ff2e2e"],
