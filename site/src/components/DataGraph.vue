@@ -53,7 +53,7 @@ function parse_time_ms(events: Event[]): number[] {
     const out: number[] = []
 
     for (let i = 0; i < e.length; i++) {
-        out.push(e[i].time_ms)
+        out.push(e[i].time_ms > 1000 ? 1000 : e[i].time_ms)
     }
 
     return out;
@@ -120,8 +120,9 @@ onMounted(() => {
                             const success = item.success ? "online" : "offline"
                             const time_ms = item.time_ms
                             const target_ip = item.target_ip
+                            const extra_message = item.time_ms > 1000 ? `, this request was over 1000ms so it's display size has been set to 1000ms but the request's time is ${time_ms}` : ""
 
-                            return `${time_ms}/ms to ${target_ip} at ${time} and we are ${success}`
+                            return `${time_ms}/ms to ${target_ip} at ${time} and we are ${success}${extra_message}`
 
                         }
                     },
