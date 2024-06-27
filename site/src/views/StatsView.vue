@@ -34,7 +34,7 @@ import ReloadButton from '@/components/ReloadButton.vue';
 import Loading from '@/components/Loading.vue';
 import SuccessSplitGraphVue from '@/components/SuccessSplitGraph.vue';
 import TimeingSplitGraph from '@/components/TimeingSplitGraph.vue';
-import TimeMsData from '@/components/TImeMsData.vue';
+import TimeMsData from '@/components/TimeMsData.vue';
 import DownloadButton from '@/components/DownloadButton.vue';
 import { storeToRefs } from "pinia"
 import { useDataStore } from "../stores/datastore"
