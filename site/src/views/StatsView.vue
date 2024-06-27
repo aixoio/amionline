@@ -21,7 +21,7 @@
                 <SuccessSplitGraphVue v-if="canshowresults" class="m-8 center w-full h-full"></SuccessSplitGraphVue>
                 <TimeingSplitGraph v-if="canshowresults" class="m-8 center w-full h-full"></TimeingSplitGraph>
             </div>
-            <TimeMSData v-if="canshowresults" class="m-8"></TimeMSData>
+            <TimeMsDataInfo v-if="canshowresults" class="m-8"></TimeMsDataInfo>
         </div>
         <Loading v-if="!loaded" class="flex justify-center items-center h-full mt-56"></Loading>
     </div>
@@ -34,7 +34,7 @@ import ReloadButton from '@/components/ReloadButton.vue';
 import Loading from '@/components/Loading.vue';
 import SuccessSplitGraphVue from '@/components/SuccessSplitGraph.vue';
 import TimeingSplitGraph from '@/components/TimeingSplitGraph.vue';
-import TimeMsData from '@/components/TimeMsData.vue';
+import TimeMsDataInfo from '@/components/TimeMsDataInfo.vue';
 import DownloadButton from '@/components/DownloadButton.vue';
 import { storeToRefs } from "pinia"
 import { useDataStore } from "../stores/datastore"
